@@ -3,7 +3,7 @@ const { FilesPlugin } = require("./script/files");
 const { ReloadPlugin } = require("./script/reload");
 const { ManifestPlugin } = require("./script/manifest");
 const { WrapperCodePlugin } = require("./script/wrapper");
-const { default: HtmlPlugin } = require("@rspack/plugin-html");
+const { default: HtmlPlugin } = require("html-webpack-plugin");
 const { getUniqueId, isDev, isGecko } = require("./script/utils/node");
 
 const folder = isGecko ? "build-gecko" : "build";
@@ -14,9 +14,6 @@ process.env.EVENT_TYPE = EVENT_TYPE;
 process.env.INJECT_FILE = INJECT_FILE;
 process.env.PLATFORM = process.env.PLATFORM || "chromium";
 
-/**
- * @type {import('@rspack/cli').Configuration}
- */
 module.exports = {
   context: __dirname,
   entry: {
@@ -101,5 +98,3 @@ module.exports = {
   },
   devtool: false,
 };
-
-// https://www.rspack.dev/
