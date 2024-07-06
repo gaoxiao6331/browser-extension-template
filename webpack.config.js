@@ -3,7 +3,7 @@ const { FilesPlugin } = require("./script/files");
 const { ReloadPlugin } = require("./script/reload");
 const { ManifestPlugin } = require("./script/manifest");
 const { WrapperCodePlugin } = require("./script/wrapper");
-const { default: HtmlPlugin } = require("html-webpack-plugin");
+const HtmlPlugin = require("html-webpack-plugin");
 const { getUniqueId, isDev, isGecko } = require("./script/utils/node");
 
 const folder = isGecko ? "build-gecko" : "build";
@@ -38,46 +38,46 @@ module.exports = {
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  builtins: {
-    define: {
-      "__DEV__": JSON.stringify(isDev),
-      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
-      "process.env.PLATFORM": JSON.stringify(process.env.PLATFORM),
-      "process.env.EVENT_TYPE": JSON.stringify(process.env.EVENT_TYPE),
-      "process.env.INJECT_FILE": JSON.stringify(process.env.INJECT_FILE),
-    },
-    pluginImport: [
-      {
-        libraryName: "@arco-design/web-react",
-        customName: "@arco-design/web-react/es/{{ member }}",
-        style: true,
-      },
-    ],
-  },
+  // builtins: {
+  //   define: {
+  //     "__DEV__": JSON.stringify(isDev),
+  //     "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
+  //     "process.env.PLATFORM": JSON.stringify(process.env.PLATFORM),
+  //     "process.env.EVENT_TYPE": JSON.stringify(process.env.EVENT_TYPE),
+  //     "process.env.INJECT_FILE": JSON.stringify(process.env.INJECT_FILE),
+  //   },
+  //   pluginImport: [
+  //     {
+  //       libraryName: "@arco-design/web-react",
+  //       customName: "@arco-design/web-react/es/{{ member }}",
+  //       style: true,
+  //     },
+  //   ],
+  // },
   module: {
     rules: [
       { test: /\.svg$/, type: "asset" },
       {
-        test: /\.(m|module).scss$/,
-        use: [{ loader: "sass-loader" }],
+        test: /\.(m|module).less$/,
+        use: [{ loader: "less-loader" }],
         type: "css/module",
       },
-      {
-        test: /\.less$/,
-        use: [
-          {
-            loader: "less-loader",
-            options: {
-              lessOptions: {
-                javascriptEnabled: true,
-                importLoaders: true,
-                localIdentName: "[name]__[hash:base64:5]",
-              },
-            },
-          },
-        ],
-        type: "css",
-      },
+      // {
+      //   test: /\.less$/,
+      //   use: [
+      //     {
+      //       loader: "less-loader",
+      //       options: {
+      //         lessOptions: {
+      //           javascriptEnabled: true,
+      //           importLoaders: true,
+      //           localIdentName: "[name]__[hash:base64:5]",
+      //         },
+      //       },
+      //     },
+      //   ],
+      //   type: "css",
+      // },
       {
         test: /\.(jsx?|tsx?)$/,
         use: [
