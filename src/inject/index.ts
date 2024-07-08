@@ -6,7 +6,7 @@ import { initBaseEvents } from "./utils/events";
 import { CIBridge } from "@/bridge/content-inject";
 import { onContentMessage } from "./channel/content";
 import { LOG_LEVEL, logger } from "@/utils/logger";
-import { DOM_STAGE } from "copy/src/constant/event";
+import { DOM_STAGE } from "@/utils/constant";
 
 (async (): Promise<void> => {
   if (__DEV__) {

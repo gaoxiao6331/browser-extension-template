@@ -1,7 +1,7 @@
 import type { WebSite } from "../types/website";
 import { CONTEXT_MENU_TYPE, COPY_TYPE, KEYBOARD_TYPE } from "@/utils/constant";
 import { logger } from "@/utils/logger";
-import { DOM_STAGE } from "copy/src/constant/event";
+import { DOM_STAGE } from "@/utils/constant";
 import type { CIRequestType } from "@/bridge/content-inject/request";
 import { CI_EXECUTION_ENUM, CONTENT_TO_INJECT_REQUEST } from "@/bridge/content-inject/request";
 

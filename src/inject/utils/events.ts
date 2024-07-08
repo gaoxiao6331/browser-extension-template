@@ -8,7 +8,7 @@ import {
   PAGE_LOADED,
   SELECT_START,
   TOUCH_START,
-} from "copy/src/constant/event";
+} from "@/utils/constant";
 import { EVENTS_ENUM, EventBus } from "./bus";
 
 export const initBaseEvents = () => {

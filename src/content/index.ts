@@ -1,5 +1,5 @@
 import { PCBridge } from "@/bridge/popup-content";
-import { onReceiveReloadMsg } from "../utils/reload";
+import { onReceiveReloadMsg } from "@/utils/reload";
 import { onPopupMessage } from "./channel/popup";
 import { LOG_LEVEL, logger } from "@/utils/logger";
 import { initializeWorker } from "./runtime/initialize";

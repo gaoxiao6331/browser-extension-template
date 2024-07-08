@@ -5,6 +5,8 @@ const { ManifestPlugin } = require("./script/manifest");
 const { WrapperCodePlugin } = require("./script/wrapper");
 const HtmlPlugin = require("html-webpack-plugin");
 const { getUniqueId, isDev, isGecko } = require("./script/utils/node");
+const { webpack, DefinePlugin } = require("webpack");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const folder = isGecko ? "build-gecko" : "build";
 const EVENT_TYPE = isDev ? "EVENT_TYPE" : getUniqueId();
@@ -28,24 +30,26 @@ module.exports = {
       template: "./public/popup.html",
       inject: false,
     }),
+    new MiniCssExtractPlugin(),
     new FilesPlugin(),
     new ReloadPlugin(),
     new ManifestPlugin(),
     new WrapperCodePlugin(),
+    new DefinePlugin({
+      "__DEV__": JSON.stringify(isDev),
+      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
+      "process.env.PLATFORM": JSON.stringify(process.env.PLATFORM),
+      "process.env.EVENT_TYPE": JSON.stringify(process.env.EVENT_TYPE),
+      "process.env.INJECT_FILE": JSON.stringify(process.env.INJECT_FILE),
+    })
   ],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
+    extensions: [".ts", ".tsx",".js", ".jsx"]
   },
   // builtins: {
-  //   define: {
-  //     "__DEV__": JSON.stringify(isDev),
-  //     "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
-  //     "process.env.PLATFORM": JSON.stringify(process.env.PLATFORM),
-  //     "process.env.EVENT_TYPE": JSON.stringify(process.env.EVENT_TYPE),
-  //     "process.env.INJECT_FILE": JSON.stringify(process.env.INJECT_FILE),
-  //   },
   //   pluginImport: [
   //     {
   //       libraryName: "@arco-design/web-react",
@@ -56,37 +60,25 @@ module.exports = {
   // },
   module: {
     rules: [
-      { test: /\.svg$/, type: "asset" },
+      { test: /\.svg$/, type: "asset/resource" },
       {
-        test: /\.(m|module).less$/,
-        use: [{ loader: "less-loader" }],
-        type: "css/module",
+        test: /\.less$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          "less-loader",
+        ],
       },
-      // {
-      //   test: /\.less$/,
-      //   use: [
-      //     {
-      //       loader: "less-loader",
-      //       options: {
-      //         lessOptions: {
-      //           javascriptEnabled: true,
-      //           importLoaders: true,
-      //           localIdentName: "[name]__[hash:base64:5]",
-      //         },
-      //       },
-      //     },
-      //   ],
-      //   type: "css",
-      // },
       {
         test: /\.(jsx?|tsx?)$/,
         use: [
-          {
-            loader: "./script/if-def",
-            options: {
-              // debug: true,
-            },
-          },
+          // {
+          //   loader: "./script/if-def",
+          //   options: {
+          //     // debug: true,
+          //   },
+          // },
+          'ts-loader',
         ],
       },
     ],

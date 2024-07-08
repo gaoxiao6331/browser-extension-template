@@ -1,4 +1,4 @@
-import { DOM_READY, PAGE_LOADED } from "copy/src/constant/event";
+import { DOM_READY, PAGE_LOADED } from "@/utils/constant";
 import { EVENTS_ENUM, EventBus } from "./bus";
 
 export const delayExecute = (
