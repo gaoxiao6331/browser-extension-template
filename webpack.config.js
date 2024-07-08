@@ -47,7 +47,9 @@ module.exports = {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
-    extensions: [".ts", ".tsx",".js", ".jsx"]
+    extensions: [".ts", ".tsx",".js", ".jsx"],
+    // mainFiles: ['index'],
+    // mainFields: ['main','index','module','browser'],
   },
   // builtins: {
   //   pluginImport: [
@@ -65,12 +67,19 @@ module.exports = {
         test: /\.less$/,
         use: [
           MiniCssExtractPlugin.loader,
-          "css-loader",
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              esModule: false,
+            }
+          },
           "less-loader",
         ],
       },
       {
         test: /\.(jsx?|tsx?)$/,
+        exclude: /node_modules/,
         use: [
           // {
           //   loader: "./script/if-def",
@@ -89,4 +98,7 @@ module.exports = {
     path: path.resolve(__dirname, folder),
   },
   devtool: false,
+  stats: {
+    errorDetails: true
+  }
 };
