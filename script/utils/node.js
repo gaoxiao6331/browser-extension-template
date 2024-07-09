@@ -3,12 +3,12 @@ const isProd = process.env.NODE_ENV === "production";
 const isGecko = process.env.PLATFORM === "gecko";
 const isChromium = process.env.PLATFORM ? process.env.PLATFORM === "chromium" : true;
 
-const CHARTS = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm0123456789";
+const CHARS = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm0123456789";
 const getUniqueId = (len = 10) => {
   const chars = new Array(len - 1).fill("");
   return (
-    CHARTS[Math.floor(Math.random() * 52)] +
-    chars.map(() => CHARTS[Math.floor(Math.random() * CHARTS.length)]).join("")
+    CHARS[Math.floor(Math.random() * 52)] +
+    chars.map(() => CHARTS[Math.floor(Math.random() * CHARS.length)]).join("")
   );
 };
 
