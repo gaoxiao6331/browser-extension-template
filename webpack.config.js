@@ -81,12 +81,12 @@ module.exports = {
         test: /\.(jsx?|tsx?)$/,
         exclude: /node_modules/,
         use: [
-          // {
-          //   loader: "./script/if-def",
-          //   options: {
-          //     // debug: true,
-          //   },
-          // },
+          {
+            loader: "./script/if-def",
+            options: {
+              debug: process.NODE_ENV !== 'production',
+            },
+          },
           'ts-loader',
         ],
       },
