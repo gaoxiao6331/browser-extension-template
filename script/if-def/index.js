@@ -1,16 +1,51 @@
 const path = require("path");
 const fs = require("fs");
 
-// 条件编译: `process.env.PLATFORM`的深层次嵌套
-// #IFDEF #ENDIF: `C/C++`预处理指令 平台层面扩展性
-
 /**
- * @this {import('@rspack/core').LoaderContext}
- * @param {string} source
- * @returns {string}
- */
+ * conditional compilation: 
+ * 
+ * #IFDEF/#ENDIF preprocessor directives implement like C/C++, but only can be used to process.env.PLATFORM
+ * 
+ * before compilation
+ * const a = () => {
+ *     #IFDEF A
+ *     console.log('this is A')
+ *     #ENDIF
+ * }
+ * 
+ * after compilation（if you set process.env.PLATFORM = 'A'）
+ * const a = () => {
+ *     console.log('this is A')
+ * }
+ * 
+ * after compilation（if do not set process.env.PLATFORM = 'A'）
+ * const a = () => {
+ * }
+ * 
+ * 条件编译: `process.env.PLATFORM`的深层次嵌套
+ * #IFDEF #ENDIF: `C/C++`预处理指令 平台层面扩展性
+ * 例子：
+ * 
+ * 编译前
+ * const a = () => {
+ *     #IFDEF A
+ *     console.log('this is A')
+ *     #ENDIF
+ * }
+ * 
+ * 编译后（如果设置了process.env.PLATFORM = 'A'）
+ * const a = () => {
+ *     console.log('this is A')
+ * }
+ * 
+ * 编译后（如果没有设置process.env.PLATFORM = 'A'）
+ * const a = () => {
+ * }
+ * 
+ *  */
+
 function IfDefineLoader(source) {
-  // 检查参数配置
+  // 设置loader的配置 | set the loader's config
   /** @type {boolean} */
   const debug = this.query.debug || false;
   /** @type {(string|RegExp)[]} */
@@ -20,7 +55,7 @@ function IfDefineLoader(source) {
   /** @type {string} */
   const envKey = this.query.platform || "PLATFORM";
 
-  // 过滤资源路径
+  // 检查是否应该被处理 | check whether this file should be processed
   let hit = false;
   const resourcePath = this.resourcePath;
   for (const includeConfig of include) {
@@ -48,7 +83,7 @@ function IfDefineLoader(source) {
   }
   if (!hit) return source;
 
-  // 迭代时控制该行是否命中预处理条件
+  // 迭代时控制该行是否命中预处理条件 | variables identifying whether hit
   const platform = (process.env[envKey] || "").toLowerCase();
   let terser = false;
   let revised = false;
@@ -57,12 +92,12 @@ function IfDefineLoader(source) {
   const stack = [];
   const lines = source.split("\n");
   const target = lines.map((line, index) => {
-    // 去掉首尾的空白 去掉行首注释符号与空白符(可选)
+    // 去掉首尾的空白 去掉行首注释符号与空白符 | remove white space
     const code = line.trim().replace(/^\/\/\s*/, "");
-    // 检查预处理指令起始 `#IFDEF`只会置`true`
+    // 检查预处理指令起始 `#IFDEF`只会置`true` | check `#IFDEF`
     if (/^#IFDEF/.test(code)) {
       stack.push(index);
-      // 如果是`true`继续即可
+      // 如果是`true`继续即可 | continue if is `#IFDEF`
       if (terser) return "";
       const match = code.replace("#IFDEF", "").trim();
       const group = match.split("|").map(item => item.trim().toLowerCase());
@@ -73,10 +108,10 @@ function IfDefineLoader(source) {
       }
       return "";
     }
-    // 检查预处理指令结束 `#IFDEF`只会置`false`
+    // 检查预处理指令结束 `#IFDEF`只会置`false` | check `#ENDIF`
     if (/^#ENDIF$/.test(code)) {
       const index = stack.pop();
-      // 额外的`#ENDIF`忽略
+      // 额外的`#ENDIF`忽略 | ignore extra `#ENDIF`
       if (index === undefined) return "";
       if (index === terserIndex) {
         terser = false;
@@ -84,20 +119,36 @@ function IfDefineLoader(source) {
       }
       return "";
     }
-    // 如果命中预处理条件则擦除
+    // 如果命中预处理条件则擦除 | remove this line if hits the directives
     if (terser) return "";
     return line;
   });
 
-  // 测试文件复写
+  // remove consecutive blank lines
+  const res = [target[0]]
+  let prevLine = target[0].trim() === '' ? 0 : Number.MIN_SAFE_INTEGER
+  for(let i = 1; i < target.length; i++){
+    const cur = target[i]
+    if(cur.trim() === '') {
+      _prevLine = prevLine
+      prevLine = i
+      if (_prevLine === i - 1) {
+        continue
+      }
+    }
+    res.push(cur)
+  }
+
+  const resText = res.join('\n')
+
+  // 测试文件复写 | write log file if debug option is `true`
   if (debug && revised) {
     // rm -rf ./**/*.log
     console.log("if-def-loader revise path", resourcePath);
-    fs.writeFile(resourcePath + ".log", target.join("\n"), () => null);
+    fs.writeFile(resourcePath + ".log",resText, () => null);
   }
 
-  // 返回处理结果
-  return target.join("\n");
+  return resText;
 }
 
 module.exports = IfDefineLoader;
