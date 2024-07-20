@@ -5,6 +5,7 @@ const { promisify, isGecko } = require("../utils/node");
 
 const writeFile = promisify(fs.writeFile);
 
+// webpack plugin to generate manifest file
 exports.ManifestPlugin = class ManifestPlugin {
   constructor() {
     tsNode.register();

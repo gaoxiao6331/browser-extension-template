@@ -11,14 +11,17 @@ const exec = command => {
   });
 };
 
+// webpack plugin to copy static files
 exports.FilesPlugin = class FilesPlugin {
   apply(compiler) {
     compiler.hooks.make.tap("FilesPlugin", compilation => {
+      // watch static dir, trigger the done hook, if anything changes
       const resources = path.resolve("public/static");
       !compilation.contextDependencies.has(resources) &&
         compilation.contextDependencies.add(resources);
     });
 
+    // copy static files to build dir when compilation is done
     compiler.hooks.done.tapPromise("FilesPlugin", () => {
       const locales = path.resolve("public/locales/");
       const resources = path.resolve("public/static/");
