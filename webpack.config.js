@@ -48,18 +48,7 @@ module.exports = {
       "@": path.resolve(__dirname, "./src"),
     },
     extensions: [".ts", ".tsx",".js", ".jsx"],
-    // mainFiles: ['index'],
-    // mainFields: ['main','index','module','browser'],
   },
-  // builtins: {
-  //   pluginImport: [
-  //     {
-  //       libraryName: "@arco-design/web-react",
-  //       customName: "@arco-design/web-react/es/{{ member }}",
-  //       style: true,
-  //     },
-  //   ],
-  // },
   module: {
     rules: [
       { test: /\.svg$/, type: "asset/resource" },
@@ -67,13 +56,8 @@ module.exports = {
         test: /\.less$/,
         use: [
           MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              esModule: false,
-            }
-          },
+          'css-loader',
+          'postcss-loader',
           "less-loader",
         ],
       },
@@ -87,6 +71,7 @@ module.exports = {
               debug: process.NODE_ENV !== 'production',
             },
           },
+          'babel-loader',
           'ts-loader',
         ],
       },
