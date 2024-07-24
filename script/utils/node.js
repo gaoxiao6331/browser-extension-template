@@ -8,7 +8,7 @@ const getUniqueId = (len = 10) => {
   const chars = new Array(len - 1).fill("");
   return (
     CHARS[Math.floor(Math.random() * 52)] +
-    chars.map(() => CHARTS[Math.floor(Math.random() * CHARS.length)]).join("")
+    chars.map(() => CHARS[Math.floor(Math.random() * CHARS.length)]).join("")
   );
 };
 
