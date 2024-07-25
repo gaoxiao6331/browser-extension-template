@@ -3,7 +3,7 @@ import { EVENTS_ENUM, EventBus } from "./bus";
 
 export const delayExecute = (
   when: typeof DOM_READY | typeof PAGE_LOADED = PAGE_LOADED,
-  delayMax: number | false = 6000
+  delayMax: number | false = 6000,
 ) => {
   const delayWithEvent = new Promise<void>(r => {
     const resolve = () => r();
@@ -21,6 +21,9 @@ export const delayExecute = (
       }
     }
   });
-  const delayWithTimeout = delayMax && new Promise(resolve => setTimeout(resolve, delayMax));
-  return Promise.race<unknown>([delayWithEvent, delayWithTimeout].filter(Boolean));
+  const delayWithTimeout =
+    delayMax && new Promise(resolve => setTimeout(resolve, delayMax));
+  return Promise.race<unknown>(
+    [delayWithEvent, delayWithTimeout].filter(Boolean),
+  );
 };

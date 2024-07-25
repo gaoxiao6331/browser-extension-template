@@ -21,11 +21,19 @@ export namespace Reflex {
     ? [type: T, payload: unknown extends M[T] ? null : M[T]]
     : never;
 
-  export type Array<M extends Record<string, unknown>> = _Array<Object.Keys<M>, M>;
+  export type Array<M extends Record<string, unknown>> = _Array<
+    Object.Keys<M>,
+    M
+  >;
 
-  type _Map<T extends Object.KeyType, M extends Record<Object.KeyType, unknown>> = {
+  type _Map<
+    T extends Object.KeyType,
+    M extends Record<Object.KeyType, unknown>,
+  > = {
     [P in T]: { type: P; payload: unknown extends M[P] ? never : M[P] };
   };
 
-  export type Tuple<M extends Record<string, unknown>> = Object.Values<_Map<Object.Keys<M>, M>>;
+  export type Tuple<M extends Record<string, unknown>> = Object.Values<
+    _Map<Object.Keys<M>, M>
+  >;
 }

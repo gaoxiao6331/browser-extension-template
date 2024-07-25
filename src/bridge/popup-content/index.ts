@@ -18,7 +18,10 @@ export class PCBridge {
           const tab = tabs[0];
           const tabId = tab && tab.id;
           const tabURL = tab && tab.url;
-          if (tabURL && !URL_MATCH.some(match => new RegExp(match).test(tabURL))) {
+          if (
+            tabURL &&
+            !URL_MATCH.some(match => new RegExp(match).test(tabURL))
+          ) {
             resolve(null);
             return void 0;
           }
@@ -38,7 +41,7 @@ export class PCBridge {
     const handler = (
       request: PCRequestType,
       _: chrome.runtime.MessageSender,
-      sendResponse: (response: PCResponseType | null) => void
+      sendResponse: (response: PCResponseType | null) => void,
     ) => {
       const response = cb(request);
       response && response.type === request.type && sendResponse(response);

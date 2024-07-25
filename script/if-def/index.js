@@ -2,46 +2,46 @@ const path = require("path");
 const fs = require("fs");
 
 /**
- * conditional compilation: 
- * 
+ * conditional compilation:
+ *
  * #IFDEF/#ENDIF preprocessor directives implement like C/C++, but only can be used to process.env.PLATFORM
- * 
+ *
  * before compilation
  * const a = () => {
  *     #IFDEF A
  *     console.log('this is A')
  *     #ENDIF
  * }
- * 
+ *
  * after compilation（if you set process.env.PLATFORM = 'A'）
  * const a = () => {
  *     console.log('this is A')
  * }
- * 
+ *
  * after compilation（if do not set process.env.PLATFORM = 'A'）
  * const a = () => {
  * }
- * 
+ *
  * 条件编译: `process.env.PLATFORM`的深层次嵌套
  * #IFDEF #ENDIF: `C/C++`预处理指令 平台层面扩展性
  * 例子：
- * 
+ *
  * 编译前
  * const a = () => {
  *     #IFDEF A
  *     console.log('this is A')
  *     #ENDIF
  * }
- * 
+ *
  * 编译后（如果设置了process.env.PLATFORM = 'A'）
  * const a = () => {
  *     console.log('this is A')
  * }
- * 
+ *
  * 编译后（如果没有设置process.env.PLATFORM = 'A'）
  * const a = () => {
  * }
- * 
+ *
  *  */
 
 function IfDefineLoader(source) {
@@ -125,27 +125,27 @@ function IfDefineLoader(source) {
   });
 
   // remove consecutive blank lines
-  const res = [target[0]]
-  let prevLine = target[0].trim() === '' ? 0 : Number.MIN_SAFE_INTEGER
-  for(let i = 1; i < target.length; i++){
-    const cur = target[i]
-    if(cur.trim() === '') {
-      _prevLine = prevLine
-      prevLine = i
+  const res = [target[0]];
+  let prevLine = target[0].trim() === "" ? 0 : Number.MIN_SAFE_INTEGER;
+  for (let i = 1; i < target.length; i++) {
+    const cur = target[i];
+    if (cur.trim() === "") {
+      _prevLine = prevLine;
+      prevLine = i;
       if (_prevLine === i - 1) {
-        continue
+        continue;
       }
     }
-    res.push(cur)
+    res.push(cur);
   }
 
-  const resText = res.join('\n')
+  const resText = res.join("\n");
 
   // 测试文件复写 | write log file if debug option is `true`
   if (debug && revised) {
     // rm -rf ./**/*.log
     console.log("if-def-loader revise path", resourcePath);
-    fs.writeFile(resourcePath + ".log",resText, () => null);
+    fs.writeFile(resourcePath + ".log", resText, () => null);
   }
 
   return resText;

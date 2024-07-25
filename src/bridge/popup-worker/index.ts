@@ -16,11 +16,13 @@ export class PWBridge {
     });
   }
 
-  static onPopupMessage(cb: (data: PWRequestType, sender: chrome.runtime.MessageSender) => null) {
+  static onPopupMessage(
+    cb: (data: PWRequestType, sender: chrome.runtime.MessageSender) => null,
+  ) {
     const handler = (
       message: PWRequestType,
       sender: chrome.runtime.MessageSender,
-      sendResponse: (response?: null) => void
+      sendResponse: (response?: null) => void,
     ) => {
       const rtn = cb(message, sender);
       sendResponse(rtn || null);

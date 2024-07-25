@@ -26,14 +26,19 @@ import { DOM_STAGE } from "@/utils/constant";
   initBaseEvents();
   // 初始化状态
   const state: State = {
-    COPY: !!storage.local.get<boolean>(COPY_TYPE) || !!storage.session.get<boolean>(COPY_TYPE),
+    COPY:
+      !!storage.local.get<boolean>(COPY_TYPE) ||
+      !!storage.session.get<boolean>(COPY_TYPE),
     KEYBOARD:
-      !!storage.local.get<boolean>(KEYBOARD_TYPE) || !!storage.session.get<boolean>(KEYBOARD_TYPE),
+      !!storage.local.get<boolean>(KEYBOARD_TYPE) ||
+      !!storage.session.get<boolean>(KEYBOARD_TYPE),
     CONTEXT_MENU:
       !!storage.local.get<boolean>(CONTEXT_MENU_TYPE) ||
       !!storage.session.get<boolean>(CONTEXT_MENU_TYPE),
   };
-  const handler = websites.find(item => item.regexp.test(location.host)) || websites.slice(-1)[0];
+  const handler =
+    websites.find(item => item.regexp.test(location.host)) ||
+    websites.slice(-1)[0];
   if (!handler) return void 0;
   handler.init && handler.init(state);
   state.COPY && handler.start(COPY_TYPE, DOM_STAGE.START);

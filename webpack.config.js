@@ -41,13 +41,13 @@ module.exports = {
       "process.env.PLATFORM": JSON.stringify(process.env.PLATFORM),
       "process.env.EVENT_TYPE": JSON.stringify(process.env.EVENT_TYPE),
       "process.env.INJECT_FILE": JSON.stringify(process.env.INJECT_FILE),
-    })
+    }),
   ],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
-    extensions: [".ts", ".tsx",".js", ".jsx"],
+    extensions: [".ts", ".tsx", ".js", ".jsx"],
   },
   module: {
     rules: [
@@ -56,8 +56,8 @@ module.exports = {
         test: /\.less$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
+          "css-loader",
+          "postcss-loader",
           "less-loader",
         ],
       },
@@ -68,11 +68,11 @@ module.exports = {
           {
             loader: "./script/if-def",
             options: {
-              debug: process.NODE_ENV !== 'production',
+              debug: process.NODE_ENV !== "production",
             },
           },
-          'babel-loader',
-          'ts-loader',
+          "babel-loader",
+          "ts-loader",
         ],
       },
     ],
@@ -84,6 +84,6 @@ module.exports = {
   },
   devtool: false,
   stats: {
-    errorDetails: true
-  }
+    errorDetails: true,
+  },
 };

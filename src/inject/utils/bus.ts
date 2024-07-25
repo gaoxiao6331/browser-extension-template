@@ -20,7 +20,7 @@ const EVENTS_TYPE = [
 
 export const EVENTS_ENUM = EVENTS_TYPE.reduce(
   (acc, cur) => ({ ...acc, [cur]: `__${cur}__` }),
-  {} as { [K in typeof EVENTS_TYPE[number]]: `__${K}__` }
+  {} as { [K in (typeof EVENTS_TYPE)[number]]: `__${K}__` },
 );
 
 interface EventBusParams {

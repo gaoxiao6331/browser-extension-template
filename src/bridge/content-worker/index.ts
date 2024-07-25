@@ -16,11 +16,13 @@ export class CWBridge {
     });
   }
 
-  static onContentMessage(cb: (data: CWRequestType, sender: chrome.runtime.MessageSender) => null) {
+  static onContentMessage(
+    cb: (data: CWRequestType, sender: chrome.runtime.MessageSender) => null,
+  ) {
     const handler = (
       message: CWRequestType,
       sender: chrome.runtime.MessageSender,
-      sendResponse: (response?: null) => void
+      sendResponse: (response?: null) => void,
     ) => {
       const rtn = cb(message, sender);
       sendResponse(rtn || null);

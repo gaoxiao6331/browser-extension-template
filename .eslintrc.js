@@ -22,7 +22,10 @@ module.exports = {
       files: ["*.tsx"],
       parser: "@typescript-eslint/parser",
       plugins: ["react", "react-hooks", "@typescript-eslint/eslint-plugin"],
-      extends: ["plugin:@typescript-eslint/recommended", "plugin:react-hooks/recommended"],
+      extends: [
+        "plugin:@typescript-eslint/recommended",
+        "plugin:react-hooks/recommended",
+      ],
     },
   ],
   ignorePatterns: ["node_modules", "build", "dist", "coverage", "public"],

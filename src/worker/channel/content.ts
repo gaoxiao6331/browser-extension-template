@@ -4,7 +4,10 @@ import { cross } from "@/utils/global";
 import { logger } from "@/utils/logger";
 import { RELOAD_APP, reloadApp } from "@/utils/reload";
 
-export const onContentMessage = (data: CWRequestType, sender: chrome.runtime.MessageSender) => {
+export const onContentMessage = (
+  data: CWRequestType,
+  sender: chrome.runtime.MessageSender,
+) => {
   logger.info("Worker Receive Content Message", data);
   switch (data.type) {
     case CWBridge.REQUEST.RELOAD: {
@@ -15,7 +18,8 @@ export const onContentMessage = (data: CWRequestType, sender: chrome.runtime.Mes
       const { payload } = data;
       if (payload && sender.tab && sender.tab.id) {
         const tabId = sender.tab.id;
-        let action: typeof cross.action | typeof cross.browserAction = cross.action;
+        let action: typeof cross.action | typeof cross.browserAction =
+          cross.action;
         // #IFDEF GECKO
         action = cross.browserAction;
         // #ENDIF

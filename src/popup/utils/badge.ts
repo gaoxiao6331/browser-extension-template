@@ -10,7 +10,8 @@ export const cipherBadgeNumber = (checked: boolean) => {
     })
     .then(tabId => {
       if (tabId) {
-        let action: typeof cross.action | typeof cross.browserAction = cross.action;
+        let action: typeof cross.action | typeof cross.browserAction =
+          cross.action;
         // #IFDEF GECKO
         action = cross.browserAction;
         // #ENDIF

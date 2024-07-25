@@ -15,7 +15,8 @@ exports.ManifestPlugin = class ManifestPlugin {
   apply(compiler) {
     compiler.hooks.make.tap("ManifestPlugin", compilation => {
       const manifest = this.manifest;
-      !compilation.fileDependencies.has(manifest) && compilation.fileDependencies.add(manifest);
+      !compilation.fileDependencies.has(manifest) &&
+        compilation.fileDependencies.add(manifest);
     });
 
     compiler.hooks.done.tapPromise("ManifestPlugin", () => {
@@ -24,7 +25,10 @@ exports.ManifestPlugin = class ManifestPlugin {
       const version = require(path.resolve("package.json")).version;
       manifest.version = version;
       const folder = isGecko ? "build-gecko" : "build";
-      return writeFile(path.resolve(`${folder}/manifest.json`), JSON.stringify(manifest, null, 2));
+      return writeFile(
+        path.resolve(`${folder}/manifest.json`),
+        JSON.stringify(manifest, null, 2),
+      );
     });
   }
 };

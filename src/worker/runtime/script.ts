@@ -31,7 +31,10 @@ export const implantScript = () => {
       if (changeInfo.status == "loading") {
         const tabId = tab && tab.id;
         const tabURL = tab && tab.url;
-        if (tabURL && !URL_MATCH.some(match => new RegExp(match).test(tabURL))) {
+        if (
+          tabURL &&
+          !URL_MATCH.some(match => new RegExp(match).test(tabURL))
+        ) {
           return void 0;
         }
         if (tabId && cross.scripting) {

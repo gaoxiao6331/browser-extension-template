@@ -8,7 +8,7 @@ export const LOG_LEVEL = {
 class Logger {
   constructor(private level: number) {}
 
-  setLevel(level: typeof LOG_LEVEL[keyof typeof LOG_LEVEL]) {
+  setLevel(level: (typeof LOG_LEVEL)[keyof typeof LOG_LEVEL]) {
     this.level = level;
   }
 

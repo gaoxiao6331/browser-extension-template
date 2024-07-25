@@ -7,9 +7,9 @@ import { STYLE_ID, AUTO_USER_SELECT } from "../utils/styles";
 export const Basic: WebSite = {
   regexp: /.*/,
   start(type) {
-    console.log(type)
+    console.log(type);
   },
   close(type) {
-    console.log(type)
+    console.log(type);
   },
 };

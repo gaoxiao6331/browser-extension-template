@@ -18,7 +18,10 @@ export class WCBridge {
           const tab = tabs[0];
           const tabId = tab && tab.id;
           const tabURL = tab && tab.url;
-          if (tabURL && !URL_MATCH.some(match => new RegExp(match).test(tabURL))) {
+          if (
+            tabURL &&
+            !URL_MATCH.some(match => new RegExp(match).test(tabURL))
+          ) {
             resolve(null);
             return void 0;
           }
@@ -38,7 +41,7 @@ export class WCBridge {
     const handler = (
       message: WCRequestType,
       _: chrome.runtime.MessageSender,
-      sendResponse: (response?: void) => void
+      sendResponse: (response?: void) => void,
     ) => {
       const rtn = cb(message);
       rtn && sendResponse(rtn);

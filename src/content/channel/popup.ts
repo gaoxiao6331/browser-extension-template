@@ -15,7 +15,9 @@ export const onPopupMessage = (data: PCRequestType) => {
     case POPUP_TO_CONTENT_REQUEST.COPY_TYPE: {
       CIBridge.postToInject({
         type: CONTENT_TO_INJECT_REQUEST.COPY_TYPE,
-        payload: data.payload.checked ? CI_EXECUTION_ENUM.START : CI_EXECUTION_ENUM.CLOSE,
+        payload: data.payload.checked
+          ? CI_EXECUTION_ENUM.START
+          : CI_EXECUTION_ENUM.CLOSE,
       });
       if (!data.payload.once) {
         storage.local.set(COPY_TYPE, data.payload.checked);
@@ -27,7 +29,9 @@ export const onPopupMessage = (data: PCRequestType) => {
     case POPUP_TO_CONTENT_REQUEST.KEYBOARD_TYPE: {
       CIBridge.postToInject({
         type: CONTENT_TO_INJECT_REQUEST.KEYBOARD_TYPE,
-        payload: data.payload.checked ? CI_EXECUTION_ENUM.START : CI_EXECUTION_ENUM.CLOSE,
+        payload: data.payload.checked
+          ? CI_EXECUTION_ENUM.START
+          : CI_EXECUTION_ENUM.CLOSE,
       });
       if (!data.payload.once) {
         storage.local.set(KEYBOARD_TYPE, data.payload.checked);
@@ -39,7 +43,9 @@ export const onPopupMessage = (data: PCRequestType) => {
     case POPUP_TO_CONTENT_REQUEST.CONTEXT_MENU_TYPE: {
       CIBridge.postToInject({
         type: CONTENT_TO_INJECT_REQUEST.CONTEXT_MENU_TYPE,
-        payload: data.payload.checked ? CI_EXECUTION_ENUM.START : CI_EXECUTION_ENUM.CLOSE,
+        payload: data.payload.checked
+          ? CI_EXECUTION_ENUM.START
+          : CI_EXECUTION_ENUM.CLOSE,
       });
       if (!data.payload.once) {
         storage.local.set(CONTEXT_MENU_TYPE, data.payload.checked);
@@ -54,11 +60,16 @@ export const onPopupMessage = (data: PCRequestType) => {
         type: data.type,
         payload: {
           [PC_QUERY_STATE_ENUM.COPY]: !!storage.local.get<boolean>(COPY_TYPE),
-          [PC_QUERY_STATE_ENUM.MENU]: !!storage.local.get<boolean>(CONTEXT_MENU_TYPE),
-          [PC_QUERY_STATE_ENUM.KEYBOARD]: !!storage.local.get<boolean>(KEYBOARD_TYPE),
-          [PC_QUERY_STATE_ENUM.COPY_ONCE]: !!storage.session.get<boolean>(COPY_TYPE),
-          [PC_QUERY_STATE_ENUM.MENU_ONCE]: !!storage.session.get<boolean>(CONTEXT_MENU_TYPE),
-          [PC_QUERY_STATE_ENUM.KEYBOARD_ONCE]: !!storage.session.get<boolean>(KEYBOARD_TYPE),
+          [PC_QUERY_STATE_ENUM.MENU]:
+            !!storage.local.get<boolean>(CONTEXT_MENU_TYPE),
+          [PC_QUERY_STATE_ENUM.KEYBOARD]:
+            !!storage.local.get<boolean>(KEYBOARD_TYPE),
+          [PC_QUERY_STATE_ENUM.COPY_ONCE]:
+            !!storage.session.get<boolean>(COPY_TYPE),
+          [PC_QUERY_STATE_ENUM.MENU_ONCE]:
+            !!storage.session.get<boolean>(CONTEXT_MENU_TYPE),
+          [PC_QUERY_STATE_ENUM.KEYBOARD_ONCE]:
+            !!storage.session.get<boolean>(KEYBOARD_TYPE),
         },
       };
     }

@@ -4,7 +4,7 @@ import { MARK } from "./constant";
 const PW_REQUEST_TYPE = ["RELOAD", "__"] as const;
 export const POPUP_TO_WORKER_REQUEST = PW_REQUEST_TYPE.reduce(
   (acc, cur) => ({ ...acc, [cur]: `__${cur}__${MARK}__` }),
-  {} as { [K in typeof PW_REQUEST_TYPE[number]]: `__${K}__${typeof MARK}__` }
+  {} as { [K in (typeof PW_REQUEST_TYPE)[number]]: `__${K}__${typeof MARK}__` },
 );
 
 export type PWRequestMap = {

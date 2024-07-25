@@ -1,7 +1,9 @@
 const isDev = process.env.NODE_ENV === "development";
 const isProd = process.env.NODE_ENV === "production";
 const isGecko = process.env.PLATFORM === "gecko";
-const isChromium = process.env.PLATFORM ? process.env.PLATFORM === "chromium" : true;
+const isChromium = process.env.PLATFORM
+  ? process.env.PLATFORM === "chromium"
+  : true;
 
 const CHARS = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm0123456789";
 const getUniqueId = (len = 10) => {

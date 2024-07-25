@@ -11,7 +11,10 @@ export const onReceiveReloadMsg = () => {
       // 收到消息即重载
       ws.onmessage = () => {
         try {
-          CWBridge.postToWorker({ type: CWBridge.REQUEST.RELOAD, payload: null });
+          CWBridge.postToWorker({
+            type: CWBridge.REQUEST.RELOAD,
+            payload: null,
+          });
         } catch (error) {
           logger.warning("SEND MESSAGE ERROR", error);
         }
