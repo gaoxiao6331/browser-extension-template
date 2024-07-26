@@ -27,7 +27,7 @@ export const onContentMessage = (handler: WebSite) => {
                 {
                   style: {
                     position: "fixed",
-                    zIndex: Number.MAX_VALUE,
+                    zIndex: 2147483647,
                     top: 0,
                     width: "100vw",
                     height: "100vh",
