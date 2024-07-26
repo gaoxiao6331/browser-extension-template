@@ -11,7 +11,7 @@ import { PCBridge } from "@/bridge/popup-content";
 import { I18n } from "../i18n";
 import { cross } from "@/utils/global";
 import { cipherBadgeNumber } from "../utils/badge";
-import { PC_QUERY_STATE_ENUM } from "@/bridge/popup-content/response";
+import { POPUP_TO_CONTENT_REQUEST } from "@/bridge/popup-content/request";
 
 const Row = Grid.Row;
 const Col = Grid.Col;
@@ -19,16 +19,21 @@ const Col = Grid.Col;
 const i18n = new I18n(cross.i18n.getUILanguage());
 
 export const App: FC = () => {
-  const a = "111";
-  const b = "2222";
-
   return (
-    <div className="w-[1000px] bg-red-600">
-      <Switch checkedText="ON" uncheckedText="OFF" />
-      <div>
-        <div>fjdakfjs</div>
-      </div>
-      {__DEV__ && 1234 && (
+    <div className="w-[500px] h-[300px]">
+      <Switch
+        checkedText="ON"
+        uncheckedText="OFF"
+        onChange={(e) => {
+          PCBridge.postToContent({
+            type: POPUP_TO_CONTENT_REQUEST.HELLO_WORLD,
+            payload: {
+              enable: e,
+            },
+          });
+        }}
+      />
+      {__DEV__ && (
         <a onClick={() => cross.runtime.reload()}>
           <IconRefresh />
           {i18n.t("Information.Reload")}

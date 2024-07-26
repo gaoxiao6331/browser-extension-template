@@ -12,6 +12,13 @@ import { PC_QUERY_STATE_ENUM } from "@/bridge/popup-content/response";
 export const onPopupMessage = (data: PCRequestType) => {
   logger.info("Content Receive Popup Message", location.host, data);
   switch (data.type) {
+    case POPUP_TO_CONTENT_REQUEST.HELLO_WORLD: {
+      CIBridge.postToInject({
+        type: CONTENT_TO_INJECT_REQUEST.HELLO_WORLD,
+        payload: data.payload,
+      });
+      break;
+    }
     case POPUP_TO_CONTENT_REQUEST.COPY_TYPE: {
       CIBridge.postToInject({
         type: CONTENT_TO_INJECT_REQUEST.COPY_TYPE,

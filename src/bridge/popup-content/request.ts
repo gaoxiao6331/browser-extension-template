@@ -6,6 +6,7 @@ const PC_REQUEST_TYPE = [
   "KEYBOARD_TYPE",
   "CONTEXT_MENU_TYPE",
   "QUERY_STATE",
+  "HELLO_WORLD",
 ] as const;
 export const POPUP_TO_CONTENT_REQUEST = PC_REQUEST_TYPE.reduce(
   (acc, cur) => ({ ...acc, [cur]: `__${cur}__${MARK}__` }),
@@ -20,6 +21,7 @@ type EventMap = {
     once: boolean;
   };
   [POPUP_TO_CONTENT_REQUEST.QUERY_STATE]: null;
+  [POPUP_TO_CONTENT_REQUEST.HELLO_WORLD]: { enable: boolean };
 };
 
 export type PCRequestType = Reflex.Tuple<EventMap>;

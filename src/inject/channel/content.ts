@@ -7,11 +7,44 @@ import {
   CI_EXECUTION_ENUM,
   CONTENT_TO_INJECT_REQUEST,
 } from "@/bridge/content-inject/request";
+import React from "react";
+import ReactDOM from "react-dom";
+
+let HELLO_WORLD_CONTAINER: HTMLDivElement | null;
 
 export const onContentMessage = (handler: WebSite) => {
   return (data: CIRequestType) => {
     logger.info("Inject Receive Content Message", location.host, data);
     switch (data.type) {
+      case CONTENT_TO_INJECT_REQUEST.HELLO_WORLD: {
+        if (data.payload.enable) {
+          if (!HELLO_WORLD_CONTAINER) {
+            HELLO_WORLD_CONTAINER = document.createElement("div");
+            document.body.appendChild(HELLO_WORLD_CONTAINER);
+            ReactDOM.render(
+              React.createElement(
+                "div",
+                {
+                  style: {
+                    position: "fixed",
+                    zIndex: Number.MAX_VALUE,
+                    top: 0,
+                    width: "100vw",
+                    height: "100vh",
+                    backgroundColor: "red",
+                  },
+                },
+                "HELLO WORLD",
+              ),
+              HELLO_WORLD_CONTAINER,
+            );
+          }
+        } else {
+          HELLO_WORLD_CONTAINER && document.removeChild(HELLO_WORLD_CONTAINER);
+          HELLO_WORLD_CONTAINER = null;
+        }
+        break;
+      }
       case CONTENT_TO_INJECT_REQUEST.COPY_TYPE: {
         data.payload === CI_EXECUTION_ENUM.START
           ? handler.start(COPY_TYPE, DOM_STAGE.END)
