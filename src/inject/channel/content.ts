@@ -20,6 +20,7 @@ export const onContentMessage = (handler: WebSite) => {
         if (data.payload.enable) {
           if (!HELLO_WORLD_CONTAINER) {
             HELLO_WORLD_CONTAINER = document.createElement("div");
+            HELLO_WORLD_CONTAINER.id = HELLO_WORLD_CONTAINER_ID;
             document.body.appendChild(HELLO_WORLD_CONTAINER);
             ReactDOM.render(
               React.createElement(
@@ -45,7 +46,14 @@ export const onContentMessage = (handler: WebSite) => {
             );
           }
         } else {
-          HELLO_WORLD_CONTAINER && document.removeChild(HELLO_WORLD_CONTAINER);
+          if (!HELLO_WORLD_CONTAINER) {
+            console.error(
+              "don't have the container node, maybe something unexpected happened",
+            );
+            return;
+          }
+
+          document.body.removeChild(HELLO_WORLD_CONTAINER);
           HELLO_WORLD_CONTAINER = null;
         }
         break;
