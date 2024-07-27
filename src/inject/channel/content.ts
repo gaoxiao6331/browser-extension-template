@@ -20,7 +20,6 @@ export const onContentMessage = (handler: WebSite) => {
         if (data.payload.enable) {
           if (!HELLO_WORLD_CONTAINER) {
             HELLO_WORLD_CONTAINER = document.createElement("div");
-            HELLO_WORLD_CONTAINER.id = HELLO_WORLD_CONTAINER_ID;
             document.body.appendChild(HELLO_WORLD_CONTAINER);
             ReactDOM.render(
               React.createElement(
