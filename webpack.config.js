@@ -83,7 +83,8 @@ module.exports = {
     filename: "[name].js",
     path: path.resolve(__dirname, folder),
   },
-  devtool: isDev ? "eval-cheap-module-source-map" : false,
+  // cannot use 'eval' because of the security policy of browser
+  devtool: isDev ? "source-map" : false,
   stats: {
     errorDetails: true,
   },
