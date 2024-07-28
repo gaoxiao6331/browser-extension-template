@@ -8,9 +8,6 @@ dependencies:
   '@arco-design/web-react':
     specifier: 2.50.0
     version: 2.50.0(@types/react@17.0.2)(react-dom@17.0.2)(react@17.0.2)
-  laser-utils:
-    specifier: 0.0.2-alpha.10
-    version: 0.0.2-alpha.10
   react:
     specifier: 17.0.2
     version: 17.0.2
@@ -4238,10 +4235,6 @@ packages:
     resolution: {integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==}
     engines: {node: '>=0.10.0'}
     dev: true
-
-  /laser-utils@0.0.2-alpha.10:
-    resolution: {integrity: sha512-zrlaxB1UkqC9aX99jnUGwUhsgw8CpmTGLR2bHL4+TF1f02kCBtHSc4mWuyVejXALWc+9i0RrN0gYmqtLigJUCg==}
-    dev: false
 
   /less-loader@6.0.0(webpack@5.92.1):
     resolution: {integrity: sha512-k9KrSkjkdGCQwbKPHfbJT9AfRCmOCHCCjiQCc0v2fdVCRTlJvr1Si68Zk6Z4d4UyVkp0U/nEEdQeH4wV/jW8/g==}

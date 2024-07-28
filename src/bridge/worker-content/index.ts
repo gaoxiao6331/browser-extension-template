@@ -1,5 +1,3 @@
-import { isEmptyValue } from "laser-utils";
-
 import { URL_MATCH } from "@/utils/constant";
 import { cross } from "@/utils/global";
 import { logger } from "@/utils/logger";
@@ -25,7 +23,7 @@ export class WCBridge {
             resolve(null);
             return void 0;
           }
-          if (!isEmptyValue(tabId)) {
+          if (tabId !== undefined) {
             cross.tabs.sendMessage(tabId, data).then(resolve);
           } else {
             resolve(null);

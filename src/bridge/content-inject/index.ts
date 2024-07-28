@@ -1,4 +1,3 @@
-import { decodeJSON, encodeJSON } from "laser-utils";
 import type { CIRequestType } from "./request";
 import { CONTENT_TO_INJECT_REQUEST } from "./request";
 import { EVENT_TYPE, MARK } from "./constant";
@@ -8,13 +7,13 @@ export class CIBridge {
 
   static postToInject(data: CIRequestType) {
     window.dispatchEvent(
-      new CustomEvent(EVENT_TYPE, { detail: encodeJSON(data) }),
+      new CustomEvent(EVENT_TYPE, { detail: JSON.stringify(data) }),
     );
   }
 
   static onContentMessage(cb: (data: CIRequestType) => void) {
     const handler = (event: CustomEvent<string>) => {
-      const data = decodeJSON<CIRequestType>(event.detail);
+      const data = JSON.parse(event.detail) as CIRequestType;
       if (data && data.type && data.payload) {
         cb(data);
       }

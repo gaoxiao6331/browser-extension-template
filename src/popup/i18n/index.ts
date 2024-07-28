@@ -1,4 +1,3 @@
-import { isString } from "laser-utils";
 import type { ConfigBlock, I18nTypes } from "./types";
 import { en } from "./en";
 import { zh } from "./zh";
@@ -31,7 +30,7 @@ export class I18n {
     const target: Record<string, string> = {};
     const dfs = (obj: ConfigBlock, prefix: string[]) => {
       for (const [key, value] of Object.entries(obj)) {
-        if (isString(value)) {
+        if (typeof value === "string") {
           target[[...prefix, key].join(".")] = value;
         } else {
           dfs(value, [...prefix, key]);
