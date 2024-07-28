@@ -7,7 +7,7 @@ export class PWBridge {
   public static readonly REQUEST = POPUP_TO_WORKER_REQUEST;
 
   static async postToWorker(data: PWRequestType) {
-    return new Promise<null>(resolve => {
+    return new Promise<null>((resolve) => {
       if (cross.runtime.id) {
         cross.runtime.sendMessage(data).then(resolve);
       } else {

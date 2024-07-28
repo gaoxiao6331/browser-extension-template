@@ -13,7 +13,7 @@ exports.ManifestPlugin = class ManifestPlugin {
   }
 
   apply(compiler) {
-    compiler.hooks.make.tap("ManifestPlugin", compilation => {
+    compiler.hooks.make.tap("ManifestPlugin", (compilation) => {
       const manifest = this.manifest;
       !compilation.fileDependencies.has(manifest) &&
         compilation.fileDependencies.add(manifest);

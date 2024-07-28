@@ -14,7 +14,7 @@ const getUniqueId = (len = 10) => {
   );
 };
 
-const promisify = fn => {
+const promisify = (fn) => {
   return (...args) =>
     new Promise((resolve, reject) => {
       fn(...args, (err, res) => {

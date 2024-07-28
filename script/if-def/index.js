@@ -100,7 +100,7 @@ function IfDefineLoader(source) {
       // 如果是`true`继续即可 | continue if is `#IFDEF`
       if (terser) return "";
       const match = code.replace("#IFDEF", "").trim();
-      const group = match.split("|").map(item => item.trim().toLowerCase());
+      const group = match.split("|").map((item) => item.trim().toLowerCase());
       if (group.indexOf(platform) === -1) {
         terser = true;
         revised = true;

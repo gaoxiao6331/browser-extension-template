@@ -11,16 +11,16 @@ export class PCBridge {
   public static readonly REQUEST = POPUP_TO_CONTENT_REQUEST;
 
   static async postToContent(data: PCRequestType) {
-    return new Promise<PCResponseType | null>(resolve => {
+    return new Promise<PCResponseType | null>((resolve) => {
       cross.tabs
         .query({ active: true, currentWindow: true })
-        .then(tabs => {
+        .then((tabs) => {
           const tab = tabs[0];
           const tabId = tab && tab.id;
           const tabURL = tab && tab.url;
           if (
             tabURL &&
-            !URL_MATCH.some(match => new RegExp(match).test(tabURL))
+            !URL_MATCH.some((match) => new RegExp(match).test(tabURL))
           ) {
             resolve(null);
             return void 0;
@@ -31,7 +31,7 @@ export class PCBridge {
             resolve(null);
           }
         })
-        .catch(error => {
+        .catch((error) => {
           logger.warning("Send Message Error", error);
         });
     });

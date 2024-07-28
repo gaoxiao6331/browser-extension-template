@@ -7,7 +7,7 @@ export class CWBridge {
   public static readonly REQUEST = CONTENT_TO_WORKER_REQUEST;
 
   static async postToWorker(data: CWRequestType) {
-    return new Promise<null>(resolve => {
+    return new Promise<null>((resolve) => {
       if (cross.runtime.id) {
         cross.runtime.sendMessage(data).then(resolve);
       } else {

@@ -11,7 +11,7 @@ exports.ReloadPlugin = class ReloadPlugin {
     if (isDev) {
       try {
         const server = new WebSocketServer({ port: 3333 });
-        server.on("connection", client => {
+        server.on("connection", (client) => {
           wsClient && wsClient.close();
           wsClient = client;
           console.log("Client Connected");

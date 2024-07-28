@@ -7,7 +7,7 @@ exports.WrapperCodePlugin = class WrapperCodePlugin {
   apply(compiler) {
     if (isChromium) return void 0;
     compiler.hooks.emit.tapAsync("WrapperCodePlugin", (compilation, done) => {
-      Object.keys(compilation.assets).forEach(key => {
+      Object.keys(compilation.assets).forEach((key) => {
         // if this is the inject file
         if (!isChromium && key === process.env.INJECT_FILE + ".js") {
           try {
