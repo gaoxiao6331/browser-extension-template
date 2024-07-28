@@ -130,7 +130,7 @@ function IfDefineLoader(source) {
   for (let i = 1; i < target.length; i++) {
     const cur = target[i];
     if (cur.trim() === "") {
-      _prevLine = prevLine;
+      const _prevLine = prevLine;
       prevLine = i;
       if (_prevLine === i - 1) {
         continue;
