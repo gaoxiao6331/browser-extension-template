@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { useEffect, useState } from "react";
-import { Switch, Grid, Space, Divider } from "@arco-design/web-react";
+import { Switch, Grid, Space } from "@arco-design/web-react";
 import { IconRefresh } from "@arco-design/web-react/icon";
 import { PCBridge } from "@/bridge/popup-content";
 import { I18n } from "../i18n";
@@ -42,7 +42,7 @@ export const App: FC = () => {
             checked={checked}
             checkedText="ON"
             uncheckedText="OFF"
-            onChange={(e: boolean) => {
+            onChange={(e) => {
               setChecked(e);
             }}
           />

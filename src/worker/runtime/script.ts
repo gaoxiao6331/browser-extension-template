@@ -21,7 +21,7 @@ export const implantScript = () => {
           id: process.env.INJECT_FILE,
         },
       ])
-      .catch(err => {
+      .catch((err) => {
         logger.warning("Register Inject Scripts Failed", err);
       });
   } else {
@@ -33,7 +33,7 @@ export const implantScript = () => {
         const tabURL = tab && tab.url;
         if (
           tabURL &&
-          !URL_MATCH.some(match => new RegExp(match).test(tabURL))
+          !URL_MATCH.some((match) => new RegExp(match).test(tabURL))
         ) {
           return void 0;
         }

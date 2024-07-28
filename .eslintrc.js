@@ -35,7 +35,7 @@ module.exports = {
     // 对象键值引号样式保持一致
     "quote-props": ["error", "consistent-as-needed"],
     // 箭头函数允许单参数不带括号
-    "arrow-parens": ["error", "as-needed"],
+    "arrow-parens": "off",
     // no var
     "no-var": "error",
     // const
