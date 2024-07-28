@@ -5,7 +5,7 @@ const { ManifestPlugin } = require("./script/manifest");
 const { WrapperCodePlugin } = require("./script/wrapper");
 const HtmlPlugin = require("html-webpack-plugin");
 const { getUniqueId, isDev, isGecko } = require("./script/utils/node");
-const { webpack, DefinePlugin } = require("webpack");
+const { DefinePlugin } = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const folder = isGecko ? "build-gecko" : "build";
@@ -17,6 +17,7 @@ process.env.INJECT_FILE = INJECT_FILE;
 process.env.PLATFORM = process.env.PLATFORM || "chromium";
 
 module.exports = {
+  mode: isDev ? "development" : "production",
   context: __dirname,
   entry: {
     popup: "./src/popup/index.tsx",
@@ -68,7 +69,7 @@ module.exports = {
           {
             loader: "./script/if-def",
             options: {
-              debug: process.NODE_ENV !== "production",
+              debug: isDev,
             },
           },
           "babel-loader",
