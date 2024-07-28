@@ -4,7 +4,12 @@ I tried to develop a browser extension without any CLI tools in the past and I f
 # Usage
 ```bash
 pnpm i
-
+# for chromium/chrome
+pnpm dev # development
+pnpm build # production
+# for firefox
+pnpm dev:gecko # development
+pnpm build:gecko # production
 ```
 # Acknowledgement
 - [TKScript](https://github.com/WindrunnerMax/TKScript)
