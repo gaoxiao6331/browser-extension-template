@@ -1,5 +1,4 @@
 import { cross } from "@/utils/global";
-import { isEmptyValue } from "laser-utils";
 import { logger } from "@/utils/logger";
 import { URL_MATCH } from "@/utils/constant";
 import type { PCRequestType } from "./request";
@@ -24,7 +23,7 @@ export class PCBridge {
             resolve(null);
             return void 0;
           }
-          if (!isEmptyValue(tabId)) {
+          if (tabId !== undefined) {
             cross.tabs.sendMessage(tabId, data).then(resolve);
           } else {
             resolve(null);
