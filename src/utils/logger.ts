@@ -14,25 +14,25 @@ class Logger {
 
   info(...args: unknown[]) {
     if (this.level <= LOG_LEVEL.INFO) {
-      console.log("FC Log: ", ...args);
+      console.log("Custom Log: ", ...args);
     }
   }
 
   trace(...args: unknown[]) {
     if (this.level <= LOG_LEVEL.INFO) {
-      console.trace("FC Trace: ", ...args);
+      console.trace("Custom Trace: ", ...args);
     }
   }
 
   warning(...args: unknown[]) {
     if (this.level <= LOG_LEVEL.WARNING) {
-      console.warn("FC Warning: ", ...args);
+      console.warn("Custom Warning: ", ...args);
     }
   }
 
   error(...args: unknown[]) {
     if (this.level <= LOG_LEVEL.ERROR) {
-      console.error("FC Error: ", ...args);
+      console.error("Custom Error: ", ...args);
     }
   }
 }

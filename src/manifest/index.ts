@@ -6,18 +6,18 @@ const __URL_MATCH__ = ["https://*/*", "http://*/*", "file://*/*"];
 // Chromium
 const __MANIFEST__: Record<string, unknown> = {
   manifest_version: 3,
-  name: "Force Copy",
+  name: "Hello World",
   version: "0.0.0",
-  description: "Force Copy Everything",
+  description: "",
   default_locale: "en",
   icons: {
-    32: "./static/favicon.128.png",
-    96: "./static/favicon.128.png",
-    128: "./static/favicon.128.png",
+    32: "./static/icon.png",
+    96: "./static/icon.png",
+    128: "./static/icon.png",
   },
   action: {
     default_popup: "popup.html",
-    default_icon: "./static/favicon.128.png",
+    default_icon: "./static/icon.png",
   },
   content_scripts: [
     {

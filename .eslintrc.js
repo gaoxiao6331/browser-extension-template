@@ -31,7 +31,7 @@ module.exports = {
   ignorePatterns: ["node_modules", "build", "dist", "coverage", "public"],
   rules: {
     // 分号
-    "semi": "error",
+    semi: "error",
     // 对象键值引号样式保持一致
     "quote-props": "off",
     // 箭头函数允许单参数不带括号
