@@ -40,9 +40,6 @@ export const onContentMessage = () => {
           }
         } else {
           if (!HELLO_WORLD_CONTAINER) {
-            console.error(
-              "don't have the container node, maybe something unexpected happened",
-            );
             return;
           }
 
