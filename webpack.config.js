@@ -37,7 +37,7 @@ module.exports = {
     new ManifestPlugin(),
     new WrapperCodePlugin(),
     new DefinePlugin({
-      "__DEV__": JSON.stringify(isDev),
+      __DEV__: JSON.stringify(isDev),
       "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
       "process.env.PLATFORM": JSON.stringify(process.env.PLATFORM),
       "process.env.EVENT_TYPE": JSON.stringify(process.env.EVENT_TYPE),
@@ -83,7 +83,7 @@ module.exports = {
     filename: "[name].js",
     path: path.resolve(__dirname, folder),
   },
-  devtool: false,
+  devtool: isDev ? "eval-cheap-module-source-map" : false,
   stats: {
     errorDetails: true,
   },
