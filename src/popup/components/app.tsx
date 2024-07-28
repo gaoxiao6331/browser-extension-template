@@ -1,21 +1,12 @@
 import type { FC } from "react";
-import { useEffect, useLayoutEffect, useState } from "react";
-import { Switch, Grid } from "@arco-design/web-react";
-import {
-  IconGithub,
-  IconQuestionCircle,
-  IconRefresh,
-} from "@arco-design/web-react/icon";
-import { cs } from "laser-utils";
+import { useEffect, useState } from "react";
+import { Switch, Grid, Space, Divider } from "@arco-design/web-react";
+import { IconRefresh } from "@arco-design/web-react/icon";
 import { PCBridge } from "@/bridge/popup-content";
 import { I18n } from "../i18n";
 import { cross } from "@/utils/global";
-import { cipherBadgeNumber } from "../utils/badge";
 import { POPUP_TO_CONTENT_REQUEST } from "@/bridge/popup-content/request";
 import { LocalStorage } from "@/utils/storage";
-
-const Row = Grid.Row;
-const Col = Grid.Col;
 
 const i18n = new I18n(cross.i18n.getUILanguage());
 
@@ -43,20 +34,29 @@ export const App: FC = () => {
   }, [checked]);
 
   return (
-    <div className="w-[500px] h-[300px]">
-      <Switch
-        checked={checked}
-        checkedText="ON"
-        uncheckedText="OFF"
-        onChange={(e) => {
-          setChecked(e);
-        }}
-      />
+    <div className="w-[300px] h-[200px] p-[20px] overflow-auto">
+      <Grid.Row>
+        <Space>
+          Hello World
+          <Switch
+            checked={checked}
+            checkedText="ON"
+            uncheckedText="OFF"
+            onChange={(e: boolean) => {
+              setChecked(e);
+            }}
+          />
+        </Space>
+      </Grid.Row>
       {__DEV__ && (
-        <a onClick={() => cross.runtime.reload()}>
-          <IconRefresh />
-          {i18n.t("Information.Reload")}
-        </a>
+        <div className="fixed bottom-0 text-gray-500">
+          <Grid.Row>
+            <a onClick={() => cross.runtime.reload()}>
+              <IconRefresh />
+              {i18n.t("Information.Reload")}
+            </a>
+          </Grid.Row>
+        </div>
       )}
     </div>
   );

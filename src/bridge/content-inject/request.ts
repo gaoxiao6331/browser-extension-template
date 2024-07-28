@@ -1,28 +1,15 @@
-import type { Reflex, Object } from "@/utils/types";
+import type { Reflex } from "@/utils/types";
 import { MARK } from "./constant";
 
-const CI_REQUEST_ENUM = [
-  "COPY_TYPE",
-  "KEYBOARD_TYPE",
-  "CONTEXT_MENU_TYPE",
-  "HELLO_WORLD",
-] as const;
+// content to inject message type
+const CI_REQUEST_ENUM = ["HELLO_WORLD"] as const;
+
 export const CONTENT_TO_INJECT_REQUEST = CI_REQUEST_ENUM.reduce(
   (acc, cur) => ({ ...acc, [cur]: `__${cur}__${MARK}__` }),
-  {} as { [K in (typeof CI_REQUEST_ENUM)[number]]: `__${K}__${typeof MARK}__` },
-);
-
-export const CI_EXECUTION_ENUM = {
-  START: "START",
-  CLOSE: "CLOSE",
-} as const;
-
-export type CIExecutionType = Object.Values<typeof CI_EXECUTION_ENUM>;
+  {},
+) as { [K in (typeof CI_REQUEST_ENUM)[number]]: `__${K}__${typeof MARK}__` };
 
 export type EventMap = {
-  [CONTENT_TO_INJECT_REQUEST.COPY_TYPE]: CIExecutionType;
-  [CONTENT_TO_INJECT_REQUEST.KEYBOARD_TYPE]: CIExecutionType;
-  [CONTENT_TO_INJECT_REQUEST.CONTEXT_MENU_TYPE]: CIExecutionType;
   [CONTENT_TO_INJECT_REQUEST.HELLO_WORLD]: { enable: boolean };
 };
 
