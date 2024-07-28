@@ -5,9 +5,9 @@
   "license": "GPL3",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack build --watch",
-    "build": "rm -rf build && cross-env NODE_ENV=production webpack build",
+    "build": "rm -rf build && mkdir build && cross-env NODE_ENV=production webpack build",
     "dev:gecko": "cross-env NODE_ENV=development PLATFORM=gecko webpack build --watch",
-    "build:gecko": "rm -rf build-gecko && cross-env PLATFORM=gecko NODE_ENV=production webpack build",
+    "build:gecko": "rm -rf build-gecko && mkdir build-gecko && cross-env PLATFORM=gecko NODE_ENV=production webpack build",
     "format": "eslint --fix --ext .js,.jsx,.ts,.tsx --ignore-path .gitignore ."
   },
   "repository": {
