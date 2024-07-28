@@ -4,14 +4,13 @@ import { logger } from "@/utils/logger";
 import { URL_MATCH } from "@/utils/constant";
 import type { PCRequestType } from "./request";
 import { POPUP_TO_CONTENT_REQUEST } from "./request";
-import type { PCResponseType } from "./response";
 import { MARK } from "./constant";
 
 export class PCBridge {
   public static readonly REQUEST = POPUP_TO_CONTENT_REQUEST;
 
   static async postToContent(data: PCRequestType) {
-    return new Promise<PCResponseType | null>((resolve) => {
+    return new Promise((resolve) => {
       cross.tabs
         .query({ active: true, currentWindow: true })
         .then((tabs) => {
@@ -37,14 +36,9 @@ export class PCBridge {
     });
   }
 
-  static onPopupMessage(cb: (data: PCRequestType) => void | PCResponseType) {
-    const handler = (
-      request: PCRequestType,
-      _: chrome.runtime.MessageSender,
-      sendResponse: (response: PCResponseType | null) => void,
-    ) => {
-      const response = cb(request);
-      response && response.type === request.type && sendResponse(response);
+  static onPopupMessage(cb: (data: PCRequestType) => void) {
+    const handler = (request: PCRequestType) => {
+      cb(request);
     };
     cross.runtime.onMessage.addListener(handler);
     return () => {

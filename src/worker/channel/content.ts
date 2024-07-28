@@ -14,20 +14,6 @@ export const onContentMessage = (
       reloadApp(RELOAD_APP);
       break;
     }
-    case CWBridge.REQUEST.SET_BADGE: {
-      const { payload } = data;
-      if (payload && sender.tab && sender.tab.id) {
-        const tabId = sender.tab.id;
-        let action: typeof cross.action | typeof cross.browserAction =
-          cross.action;
-        // #IFDEF GECKO
-        action = cross.browserAction;
-        // #ENDIF
-        action.setBadgeText({ text: payload.toString(), tabId });
-        action.setBadgeBackgroundColor({ color: "#4e5969", tabId });
-      }
-      break;
-    }
   }
   return null;
 };
